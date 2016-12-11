@@ -8,19 +8,23 @@
 
     <http auto-config="true">
         <intercept-url pattern="/" access="permitAll"/>
-        <intercept-url pattern="/home" access="permitAll"/>
-        <intercept-url pattern="/admin**" access="hasRole('1')"/>  <!--ADMIN == 1 -->
+        <intercept-url pattern="/main" access="hasAnyRole('ADMIN', 'CLIENT')"/>
+        <intercept-url pattern="/admin**" access="hasRole('ADMIN')"/>  <!--ADMIN == 1 -->
         <form-login login-page="/login"
-                    username-parameter="userName"
+                    default-target-url="/main"
+                    username-parameter="login"
                     password-parameter="password"
-                    authentication-failure-url="/access_denied"/>
+                    authentication-failure-url="/login?error=true"/>
+                 <!--   authentication-failure-url="/access_denied"/> -->
+        <logout logout-success-url="/login"></logout>
+        <!--    always-use-default-target="true" -->
         <csrf/>
     </http>
 
-    <!--<authentication-manager>-->
-        <!--<authentication-provider user-service-ref="authService"/>-->
-    <!--</authentication-manager>-->
+    <authentication-manager>
+        <authentication-provider user-service-ref="authService"/>
+    </authentication-manager>
 
-    <!--<beans:bean id="authService" class="by.it.auth.AuthenticationService"/>-->
+    <beans:bean id="authService" class="by.pvt.service.AuthenticationService"/>
 
 </beans:beans>

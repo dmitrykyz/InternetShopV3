@@ -65,9 +65,7 @@ public class ClientServiceImpl extends BaseService<Client> implements IClientSer
     }
 
 
-    public List<Client> getClientByLogin(String login) {
-
-
+    public List<Client> getClientByLogin(String login) throws ServiceException {
         log.info("Getting object User in class ClientServiceImpl in metod getClientByLogin by login: " + login);
         try {
             List<Client> clients = clientDao.getClientByLogin(login);

@@ -47,9 +47,7 @@ public class AdminServiceImpl extends BaseService<Admin> implements IAdminServic
         return null;
     }
 
-    public List<Admin> getAdminByLogin(String login) {
-
-
+    public List<Admin> getAdminByLogin(String login) throws ServiceException {
         log.info("Getting object User in class AdminServiceImpl in metod getAdminByLogin by login: " + login);
         try {
             List<Admin> users = adminDao.getAdminByLogin(login);

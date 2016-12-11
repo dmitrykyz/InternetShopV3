@@ -50,7 +50,7 @@ public class OrderServiceImpl extends BaseService<Order> implements IOrderServic
         return null;
     }
 
-    public List<Order> getOrderInBasketByUserId(Integer id){
+    public List<Order> getOrderInBasketByUserId(Integer id) throws ServiceException{
 
 
         log.info("Getting Order in class ClientServiceImpl in metod getOrderInBasketByUserId by id User : " + id);

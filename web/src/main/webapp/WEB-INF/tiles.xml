@@ -10,20 +10,27 @@
         <put-attribute name="footer" value="/WEB-INF/view/common/footer.jspx"/>
     </definition>
 
-    <definition name="login2" template="/WEB-INF/view/login/login2.jsp">
+    <definition name="login" extends="default">
+        <put-attribute name="title" value="Login page"/>
+        <put-attribute name="body" value="/WEB-INF/view/login/login.jspx"/>
     </definition>
-
-    <!--<definition name="main2" template="/WEB-INF/view/login/main2.jsp">-->
-    <!--</definition>-->
-
-    <!--<definition name="login" extends="default">-->
-        <!--<put-attribute name="title" value="Login page"/>-->
-        <!--<put-attribute name="body" value="/WEB-INF/view/login/login.jspx"/>-->
-    <!--</definition>-->
 
     <definition name="main" extends="default">
         <put-attribute name="title" value="Main page"/>
         <put-attribute name="body" value="/WEB-INF/view/login/main.jspx"/>
     </definition>
+
+    <definition name="access_denied" extends="default">
+        <put-attribute name="title" value="Main page"/>
+        <put-attribute name="body" value="/WEB-INF/view/login/access-denied.jspx"/>
+    </definition>
+
+    <definition name="registrationform" extends="default">
+        <put-attribute name="title" value="Main page"/>
+        <put-attribute name="body" value="/WEB-INF/view/login/registrationform.jspx"/>
+    </definition>
+
+    <!--<definition name="loginS" template="/WEB-INF/view/login/login.jspx">-->
+    <!--</definition>-->
 
 </tiles-definitions>

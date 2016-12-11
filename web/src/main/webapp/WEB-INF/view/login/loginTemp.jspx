@@ -1,0 +1,43 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:s="http://www.springframework.org/tags/form"
+          xmlns:spring="http://www.springframework.org/tags"
+          xmlns="http://www.w3.org/1999/xhtml" version="2.0"
+          xmlns:form="http://www.springframework.org/tags/form">
+
+    Form Login
+    <form:form method="post" action="checkUser" commandName="user"  class="box Login"> <!--action="checkUser""getUserById"""${loginUrl}"-->
+        <fieldset class="boxBody">
+            <form:label path="login">Login</form:label>
+            <form:input path="login"/>
+            <form:errors path="login" cssClass="error" />
+
+            <form:label path="password">Password</form:label>
+            <form:input path="password"/>
+            <form:errors path="password" cssClass="error" />
+
+            <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}"><jsp:text/></input>
+            <input type="submit" class="btn btn-default" value="Login"/>
+        </fieldset>
+    </form:form>
+
+    <!--<form action="${loginUrl}" method="post" class="form-horizontal">-->
+        <!--<div class="input-group input-sm">-->
+            <!--<label class="input-group-addon" for="login"><i class="fa fa-user"></i></label>-->
+            <!--<input type="text" class="form-control" id="login" name="login" placeholder="Enter Login" required="required"><jsp:text/></input>-->
+        <!--</div>-->
+        <!--<div class="input-group input-sm">-->
+            <!--<label class="input-group-addon" for="password"><i class="fa fa-lock"></i></label>-->
+            <!--<input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required="required"><jsp:text/></input>-->
+        <!--</div>-->
+
+        <!--<input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}"><jsp:text/></input>-->
+        <!--<div class="form-actions">-->
+            <!--<input type="submit"-->
+                   <!--class="btn btn-block btn-primary btn-default" value="Log in"/>-->
+        <!--</div>-->
+    <!--</form>-->
+
+
+</jsp:root>
+

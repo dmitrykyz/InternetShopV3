@@ -28,7 +28,7 @@ public class User implements Serializable{
     private String password;
     private String firstName;
     private String lastName;
-    private Integer userType = 0; //0 - user; 1 - adm
+    private Integer userType = 0; //0 - user; 1 - admin
 
     public User() {
 

@@ -8,6 +8,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.List;
@@ -16,17 +18,15 @@ import java.util.List;
  * Created by Dmitry on 11/20/2016.
  */
 @Service
+@Transactional(propagation = Propagation.REQUIRED)
 public abstract class BaseService<T> implements IService<T> {
 
+    @Autowired
     private Dao<T> baseDao;
 
     public BaseService() {
     }
 
-    @Autowired
-    public BaseService(Dao<T> baseDao) {
-        this.baseDao = baseDao;
-    }
 
     @Override
     public boolean saveOrUpdate(T t) throws ServiceException {
