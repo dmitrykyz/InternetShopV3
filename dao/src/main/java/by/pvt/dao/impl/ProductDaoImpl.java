@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,7 +21,9 @@ public class ProductDaoImpl extends BaseDao<Product> implements IProductDao<Prod
     private static Logger log = Logger.getLogger(ClientDaoImpl.class);
 
     public ProductDaoImpl() {
+        super();
     }
+
 
     public List<Product> getAll()throws DaoException {
         try {
@@ -31,6 +34,45 @@ public class ProductDaoImpl extends BaseDao<Product> implements IProductDao<Prod
             return list;
         } catch (HibernateException e) {
             log.error("Error Get all rows in ProductDaoImpl" + e);
+            throw new DaoException(e);
+        }
+    }
+
+    public List<Product> getAllFilterById() throws DaoException {
+        try {
+            Session session = getSession();
+            Query query = session.createQuery("from Product P ORDER BY P.idProduct ASC");
+            List<Product> list = query.list();
+            log.info("Get all rows from Product Filter By idProduct");
+            return list;
+        } catch (HibernateException e) {
+            log.error("Error Get all rows in ProductDaoImpl Filter By idProduct" + e);
+            throw new DaoException(e);
+        }
+    }
+
+    public List<Product> getAllFilterByName() throws DaoException {
+        try {
+            Session session = getSession();
+            Query query = session.createQuery("from Product P ORDER BY P.nameProduct ASC");
+            List<Product> list = query.list();
+            log.info("Get all rows from Product Filter By Name");
+            return list;
+        } catch (HibernateException e) {
+            log.error("Error Get all rows in ProductDaoImpl Filter By Name" + e);
+            throw new DaoException(e);
+        }
+    }
+
+    public List<Product> getAllFilterByPrice() throws DaoException {
+        try {
+            Session session = getSession();
+            Query query = session.createQuery("from Product P ORDER BY P.price ASC");
+            List<Product> list = query.list();
+            log.info("Get all rows from Product Filter By price");
+            return list;
+        } catch (HibernateException e) {
+            log.error("Error Get all rows in ProductDaoImpl Filter By price" + e);
             throw new DaoException(e);
         }
     }

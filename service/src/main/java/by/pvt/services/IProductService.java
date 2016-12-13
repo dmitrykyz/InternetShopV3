@@ -13,5 +13,11 @@ public interface IProductService<Product>  extends IService<Product> {
 
     List<Product> getAll() throws ServiceException;
 
+    List<Product> getAllFilterById() throws ServiceException;
+
+    List<Product> getAllFilterByName() throws ServiceException;
+
+    List<Product> getAllFilterByPrice() throws ServiceException;
+
     ProductVOforPagination paginationProducts(String page, Integer countPerPage) throws ServiceException;
 }

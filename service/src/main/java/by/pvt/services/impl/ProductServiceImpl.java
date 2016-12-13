@@ -73,6 +73,39 @@ public class ProductServiceImpl extends BaseService<Product> implements IProduct
         return tList;
     }
 
+    public List<Product> getAllFilterById() throws ServiceException {
+        List<Product> tList = null;
+        try {
+            tList = productDao.getAllFilterById();
+            log.info("GetAllFilterByName Product in ProductServiceImpl succesfully");
+        } catch (DaoException e) {
+            log.info("GetAllFilterByName Product in ProductServiceImpl ERROR");
+        }
+        return tList;
+    }
+
+    public List<Product> getAllFilterByName() throws ServiceException {
+        List<Product> tList = null;
+        try {
+            tList = productDao.getAllFilterByName();
+            log.info("GetAllFilterByName Product in ProductServiceImpl succesfully");
+        } catch (DaoException e) {
+            log.info("GetAllFilterByName Product in ProductServiceImpl ERROR");
+        }
+        return tList;
+    }
+
+    public List<Product> getAllFilterByPrice() throws ServiceException {
+        List<Product> tList = null;
+        try {
+            tList = productDao.getAllFilterByPrice();
+            log.info("GetAllFilterByName Product in ProductServiceImpl succesfully");
+        } catch (DaoException e) {
+            log.info("GetAllFilterByName Product in ProductServiceImpl ERROR");
+        }
+        return tList;
+    }
+
     public ProductVOforPagination paginationProducts(String page, Integer countPerPage) throws ServiceException {
 
         ProductVOforPagination productVOforPagination = new ProductVOforPagination();

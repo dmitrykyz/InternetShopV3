@@ -5,22 +5,18 @@
 
 <jsp:directive.page pageEncoding="UTF-8" contentType="text/html; UTF-8"/>
 <head>
-    <title>Login page</title>
-    <link href="../staticresources/css/app.css" rel="stylesheet"></link>
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
-    <title><spring:message code="page.registrationForm.title"/></title>
+
 </head>
 
 <body>
 
 
 <br/>
-<div class="container" id="mainWrapper">
+<div class="container">
     <div class="span12">
         <h2><spring:message code="page.registrationForm.header"/></h2>
-        <form:form method="post" commandName="client" action="registrationclient" class="box Login"> <!--action="getUserById""-->
+        <form:form method="post" commandName="client" action="registrationclient" class="box Registration"> <!--action="getUserById""-->
             <fieldset class="boxBody">
-                <div class="tab-pane fade" id="create">
                     <h3><spring:message code="page.registrationForm.EnterAuthParam"/></h3>
                     <br/>
                     <input type="hidden" name="command" value="addnewclient" />
@@ -35,7 +31,6 @@
                     <spring:message code="page.registrationForm.SummonCreditCard"/>:<br/> <input type="number" name="summOnCreditCard" value=""/>
                     <br/>
                     <br/>
-                </div>
                 <spring:message code="page.registrationForm.ApproveRegistration" var="approveRegistration"/>
                 <input type="submit" class="btn btn-default" value="${approveRegistration}"/>
             </fieldset>

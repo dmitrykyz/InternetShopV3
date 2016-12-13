@@ -4,9 +4,9 @@
 
 <jsp:directive.page pageEncoding="UTF-8" contentType="text/html; UTF-8"/>
 <head>
-    <title>Login page</title>
-    <link href="staticresources/css/bootstrap.css"  rel="stylesheet"></link>
-    <link href="../staticresources/css/app.css" rel="stylesheet"></link>
+   <!-- <title>Login page</title>  -->
+    <link href="staticresources/css/signin.css" rel="stylesheet"></link>
+   <!-- <link href="../staticresources/css/app.css" rel="stylesheet"></link> -->
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
 </head>
 
@@ -16,7 +16,7 @@
         <div class="login-card">
             <div class="login-form">
                 <c:url var="loginUrl" value="/login" />
-                <form action="${loginUrl}" method="post" class="form-horizontal">
+                <form action="${loginUrl}" method="post" class="form-signin" role="form"> <!--class="form-horizontal"-->
                     <c:if test="${param.error != null}">
                         <div class="alert alert-danger">
                             <spring:message code="page.login.error" var="error"/>

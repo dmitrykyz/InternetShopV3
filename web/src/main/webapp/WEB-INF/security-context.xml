@@ -9,7 +9,7 @@
     <http auto-config="true">
         <intercept-url pattern="/" access="permitAll"/>
         <intercept-url pattern="/main" access="hasAnyRole('ADMIN', 'CLIENT')"/>
-        <intercept-url pattern="/admin**" access="hasRole('ADMIN')"/>  <!--ADMIN == 1 -->
+        <intercept-url pattern="/admin" access="hasRole('ADMIN')"/>  <!--ADMIN == 1 -->
         <form-login login-page="/login"
                     default-target-url="/main"
                     username-parameter="login"
@@ -18,7 +18,7 @@
                  <!--   authentication-failure-url="/access_denied"/> -->
         <logout logout-success-url="/login"></logout>
         <!--    always-use-default-target="true" -->
-        <csrf/>
+        <csrf disabled="true"/>
     </http>
 
     <authentication-manager>

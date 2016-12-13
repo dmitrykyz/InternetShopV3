@@ -61,6 +61,13 @@ public class LoginController {
         return "main";
     }
 
+    @RequestMapping(value = "/admin", method = RequestMethod.GET)
+    public String mainAdmin(ModelMap model, Authentication principal){
+        String usernameTemp = principal.getName();
+        model.addAttribute("user", getPrincipal());
+        return "admin";
+    }
+
     @RequestMapping(value = "/access_denied", method = RequestMethod.GET)
     public String accessDeniedPage(ModelMap model) {
         model.addAttribute("user", getPrincipal());

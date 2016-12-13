@@ -6,6 +6,7 @@
     <definition name="default" template="/WEB-INF/view/layouts/default.jspx">
         <put-attribute name="title" value=""/>
         <put-attribute name="header" value="/WEB-INF/view/common/header.jspx"/>
+        <put-attribute name="menu" value=""/>
         <put-attribute name="body" value=""/>
         <put-attribute name="footer" value="/WEB-INF/view/common/footer.jspx"/>
     </definition>
@@ -17,7 +18,14 @@
 
     <definition name="main" extends="default">
         <put-attribute name="title" value="Main page"/>
-        <put-attribute name="body" value="/WEB-INF/view/login/main.jspx"/>
+        <put-attribute name="menu" value="/WEB-INF/view/main/menuByer.jspx"/>
+        <put-attribute name="body" value="/WEB-INF/view/main/main.jspx"/>
+    </definition>
+
+    <definition name="admin" extends="default">
+        <put-attribute name="title" value="Main admin page"/>
+        <put-attribute name="menu" value="/WEB-INF/view/main/menuAdmin.jspx"/>
+        <put-attribute name="body" value="/WEB-INF/view/main/main.jspx"/>
     </definition>
 
     <definition name="access_denied" extends="default">
@@ -28,6 +36,11 @@
     <definition name="registrationform" extends="default">
         <put-attribute name="title" value="Main page"/>
         <put-attribute name="body" value="/WEB-INF/view/login/registrationform.jspx"/>
+    </definition>
+
+    <definition name="error" extends="default">
+        <put-attribute name="title" value="Error page"/>
+        <put-attribute name="body" value="/WEB-INF/view/error.jspx"/>
     </definition>
 
     <!--<definition name="loginS" template="/WEB-INF/view/login/login.jspx">-->

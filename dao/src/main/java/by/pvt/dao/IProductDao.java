@@ -11,6 +11,12 @@ public interface IProductDao<T> extends Dao<T> {
 
     List<T> getAll()throws DaoException;
 
+    List<T> getAllFilterById() throws DaoException;
+
+    List<T> getAllFilterByName() throws DaoException;
+
+    List<T> getAllFilterByPrice() throws DaoException;
+
     Integer getTotalProductCount()throws DaoException;
 
     List<T> getPartProductPagination(Integer count, Integer startPosition) throws DaoException;
