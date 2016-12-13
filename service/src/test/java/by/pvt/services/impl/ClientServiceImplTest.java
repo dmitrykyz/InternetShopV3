@@ -1,8 +1,10 @@
-package by.pvt.dao.impl;
+package by.pvt.services.impl;
 
 import by.pvt.dao.exception.DaoException;
-import by.pvt.entity.Admin;
+import by.pvt.dao.impl.ProductDaoImpl;
 import by.pvt.entity.Client;
+import by.pvt.services.IClientService;
+import by.pvt.services.exception.ServiceException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,16 +17,16 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.junit.Assert.*;
 
 /**
- * Created by Dmitry on 11/22/2016.
+ * Created by Dmitry on 12/13/2016.
  */
-@ContextConfiguration("/testContext.xml")
+@ContextConfiguration("/testContextService.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 @TransactionConfiguration(transactionManager = "txManager", defaultRollback = true)
 @Transactional
-public class ClientDaoImplTest {
+public class ClientServiceImplTest {
 
     @Autowired
-    private ClientDaoImpl clientDao;
+    private IClientService clientService;
 
     private Client client1;
 
@@ -45,13 +47,9 @@ public class ClientDaoImplTest {
 
     @Test
     public void saveOrUpdate() throws Exception {
-        try {
-            clientDao.saveOrUpdate(client1);
-        } catch (DaoException e) {
-            e.printStackTrace();
-        }
-        assertNotNull(clientDao.get(1));
-        Client clientFromDb = (Client) clientDao.get(1);
+        clientService.saveOrUpdate(client1);
+        assertNotNull(clientService.get(1));
+        Client clientFromDb = (Client) clientService.get(1);
         String clientFromDbLogin = clientFromDb.getLogin();
         assertEquals("client1", clientFromDbLogin);
     }
@@ -60,21 +58,21 @@ public class ClientDaoImplTest {
     public void deletePerson() {
 
         try {
-            clientDao.saveOrUpdate(client1);
-        } catch (DaoException e) {
+            clientService.saveOrUpdate(client1);
+        } catch (ServiceException e) {
             e.printStackTrace();
         }
 
         Client persistent = null;
         try {
-            persistent = (Client) clientDao.get(1);
-            clientDao.delete(persistent);
-        } catch (DaoException e) {
+            persistent = (Client) clientService.get(1);
+            clientService.delete(persistent);
+        } catch (ServiceException e) {
             e.printStackTrace();
         }
         try {
-            assertNull(clientDao.get(1));
-        } catch (DaoException e) {
+            assertNull(clientService.get(1));
+        } catch (ServiceException e) {
             e.printStackTrace();
         }
     }
@@ -82,22 +80,14 @@ public class ClientDaoImplTest {
     @Test
     public void get() {
         try {
-            clientDao.saveOrUpdate(client1);
-            assertNotNull(clientDao.get(1));
-            Client clientFromDb = (Client) clientDao.get(1);
+            clientService.saveOrUpdate(client1);
+            assertNotNull(clientService.get(1));
+            Client clientFromDb = (Client) clientService.get(1);
             String clientFromDbFirstName = clientFromDb.getFirstName();
             assertEquals("Mikl", clientFromDbFirstName);
-        } catch (DaoException e) {
+        } catch (ServiceException e) {
             e.printStackTrace();
         }
     }
-
-//    @Test
-//    public void getClientByLogin() throws Exception {
-//        clientDao.saveOrUpdate(client1);
-//        Client clientFromDb = (Client) clientDao.getClientByLogin("client1");
-//        String clientFromDbLogin = clientFromDb.getLogin();
-//        assertEquals("client1", clientFromDbLogin);
-//    }
 
 }

@@ -32,6 +32,10 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
 			</list>
 		</property>
 
+		<property name="namingStrategy">
+			<bean class="by.pvt.util.CustomNamingStrategy"/>
+		</property>
+
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
@@ -51,7 +55,16 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
 	<tx:annotation-driven transaction-manager="txManager"/>
 	
 	<bean id="productDao" class="by.pvt.dao.impl.ProductDaoImpl">
-		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
+
+	<bean id="clientDao" class="by.pvt.dao.impl.ClientDaoImpl">
+	</bean>
+
+	<bean id="adminDao" class="by.pvt.dao.impl.AdminDaoImpl">
+	</bean>
+
+	<bean id="orderDao" class="by.pvt.dao.impl.OrderDaoImpl">
+	</bean>
+
 
 </beans>

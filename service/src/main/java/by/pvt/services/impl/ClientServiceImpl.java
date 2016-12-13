@@ -1,16 +1,12 @@
 package by.pvt.services.impl;
 
-import by.pvt.dao.Dao;
 import by.pvt.dao.IClientDao;
 import by.pvt.dao.exception.DaoException;
-import by.pvt.dao.impl.ClientDaoImpl;
 import by.pvt.entity.Client;
 import by.pvt.services.BaseService;
 import by.pvt.services.IClientService;
 import by.pvt.services.exception.ServiceException;
 import org.apache.log4j.Logger;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -77,4 +73,12 @@ public class ClientServiceImpl extends BaseService<Client> implements IClientSer
         }
 
     }
+
+//    public IClientDao getClientDao() {
+//        return clientDao;
+//    }
+//
+//    public void setClientDao(IClientDao clientDao) {
+//        this.clientDao = clientDao;
+//    }
 }

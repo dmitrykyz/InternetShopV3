@@ -1,6 +1,7 @@
 package by.pvt.dao.impl;
 
 import by.pvt.dao.BaseDao;
+import by.pvt.dao.IProductDao;
 import by.pvt.dao.exception.DaoException;
 import by.pvt.entity.Product;
 import org.junit.After;
@@ -27,20 +28,7 @@ import static org.junit.Assert.*;
 public class ProductDaoImplTest {
 
     @Autowired
-    private ProductDaoImpl productDao;
-
-//    @Test
-//    public void addPerson() {
-//        Person p = new Person();
-//        p.setName("Yuli");
-//        p.setSurname("Slabko");
-//        p.setAge(30);
-//        Person persistent = personDao.add(p);
-//        assertNotNull(persistent.getId());
-//        persistent = personDao.get(Person.class, persistent.getId());
-//        assertEquals("Person not persist", p, persistent);
-//    }
-//
+    private IProductDao<Product> productDao;
 
     @Test
     public void saveOrUpdate() throws Exception {
@@ -55,7 +43,7 @@ public class ProductDaoImplTest {
             e.printStackTrace();
         }
         assertNotNull(productDao.get(1));
-        Product productFromDb = productDao.get(1);
+        Product productFromDb = (Product) productDao.get(1);
         String nameProductFromDb = productFromDb.getNameProduct();
         assertEquals("Tea", nameProductFromDb);
     }
@@ -63,59 +51,55 @@ public class ProductDaoImplTest {
     @Test
     public void deletePerson() {
 
+        Product product1 = new Product();
+        product1.setIdProduct(2);
+        product1.setNameProduct("Lemon");
+        product1.setPrice(5.0);
+        product1.setStatus(1);
+        try {
+            productDao.saveOrUpdate(product1);
+        } catch (DaoException e) {
+            e.printStackTrace();
+        }
+
+        Product persistent = null;
+        try {
+            persistent = (Product) productDao.get(2);
+            productDao.delete(persistent);
+        } catch (DaoException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            assertNull(productDao.get(2));
+        } catch (DaoException e) {
+            e.printStackTrace();
+        }
+    }
+
+//    @Test
+//    public void getTotalProductCount(){
 //        Product product1 = new Product();
 //        product1.setIdProduct(1);
 //        product1.setNameProduct("Tea");
 //        product1.setPrice(5.0);
 //        product1.setStatus(1);
+//        Product product2 = new Product();
+//        product2.setIdProduct(2);
+//        product2.setNameProduct("Lemon");
+//        product2.setPrice(5.0);
+//        product2.setStatus(1);
+//        Integer countProduct = 0;
 //        try {
 //            productDao.saveOrUpdate(product1);
+//            productDao.saveOrUpdate(product2);
+//            List<Product> productList = productDao.getAll();
+//            countProduct = productDao.getTotalProductCount();
 //        } catch (DaoException e) {
 //            e.printStackTrace();
 //        }
-//
-//        List<Product> list = null;
-//        try {
-//            list = productDao.getAll();
-//        } catch (DaoException e) {
-//            e.printStackTrace();
-//        }
-//        int size = list.size();
-//        int sizeAfterDelete = 0;
-//        if (list.size() > 0) {
-//            Product persistent = list.get(0);
-//            try {
-//                productDao.delete(persistent);
-//                sizeAfterDelete = productDao.getAll().size();
-//            } catch (DaoException e) {
-//                e.printStackTrace();
-//            }
-//            System.out.println("-------------------" + sizeAfterDelete);
-//            System.out.println("-------------------" + size);
-//            assertNotSame(sizeAfterDelete, size);
-//        }
-    }
+//        assertEquals(java.util.Optional.ofNullable(countProduct), 2);
+//    }
 
-    @Test
-    public void getAll() throws Exception {
-//        List<Product> productListafter = null;
-//        productListafter = productDao.getAll();
-//        System.out.println("---------" + productListbefore.size());
-//        System.out.println("+++++++++" + productListafter.size());
-//        assertEquals(productListbefore.size(), productListafter.size());
-
-
-    }
-
-    @Test
-    public void getTotalProductCount() throws Exception {
-
-
-    }
-
-    @Test
-    public void getPartProductPagination() throws Exception {
-
-    }
 
 }

@@ -11,7 +11,7 @@
     <![CDATA[
     <script src="../staticresources/js/jquery-3.1.1.min.js" type="text/javascript"><jsp:text/></script>
     <script src="../staticresources/js/utils.js" type="text/javascript"><jsp:text/></script>
-    <link rel="stylesheet" href="../assests/css/style.css" type="text/css">
+    <link href="staticresources/css/bootstrap.css"  rel="stylesheet"></link>
     ]]>
     <tiles:insertAttribute  name="title"/>
     <c:if test="${not empty title}">

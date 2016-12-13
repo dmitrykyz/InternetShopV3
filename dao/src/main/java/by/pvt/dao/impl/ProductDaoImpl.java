@@ -21,9 +21,8 @@ public class ProductDaoImpl extends BaseDao<Product> implements IProductDao<Prod
     private static Logger log = Logger.getLogger(ClientDaoImpl.class);
 
     public ProductDaoImpl() {
-        super();
-    }
 
+    }
 
     public List<Product> getAll()throws DaoException {
         try {

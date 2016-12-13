@@ -7,10 +7,13 @@ import by.pvt.services.IClientService;
 import by.pvt.services.IOrderService;
 import by.pvt.services.IProductService;
 import by.pvt.services.exception.ServiceException;
+import com.sun.naming.internal.ResourceManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -21,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 
 /**
  * Created by Dmitry on 12/11/2016.
@@ -49,6 +54,36 @@ public class MainPageController {
             e.printStackTrace();
         }
         return new ModelAndView("main", "productList", productList);
+    }
+
+    @RequestMapping(value = {"/getAllProductPagination"})
+    public ModelAndView getAllProductPagination() {
+//        UserPaginationVO userPaginationVO = null;
+//
+//        if (countPerPage == null)
+//            countPerPage = "4";
+//        if (page == null)
+//            page = "1";
+//
+//        try {
+//            userPaginationVO = userService.paginationUsers(page, Integer.valueOf(countPerPage));
+//        } catch (ServiceException e) {
+//            e.printStackTrace();
+//        }
+//
+        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.addObject("totaluserscount", userPaginationVO.getTotalUsersCount());
+//        modelAndView.addObject("countofpages", (int) Math.ceil(userPaginationVO.getTotalUsersCount() * 1.0 / Integer.valueOf(countPerPage)));
+//        modelAndView.addObject("page", userPaginationVO.getPage());
+//        modelAndView.addObject("alluserslist", userPaginationVO.getUserEntityList());
+//        modelAndView.addObject("countPerPage",countPerPage);
+//
+//        //session.setAttribute("page", userPaginationVO.getPage());
+//
+//        //session.setAttribute("countPerPage", countPerPage);
+
+        modelAndView.setViewName("showProductPagination");
+        return modelAndView;
     }
 
     @RequestMapping(value = {"/filtrProductbyId"})
@@ -92,12 +127,9 @@ public class MainPageController {
     public ModelAndView showbasket(Authentication principal) {
         ArrayList<Order> listorderinbasket = null;
         //Get all Order from DB by User Id using serviceService
-        String username = principal.getName();
         try {
-            ArrayList clientList = (ArrayList<Client>) clientService.getClientByLogin(username);
-            if (!clientList.isEmpty()){
-                Client client = (Client) clientList.get(0);
-                Integer userId = client.getIdUser();
+            Integer userId = getIdUserFromPrincipal(principal);
+            if (userId != null){
                 listorderinbasket = (ArrayList<Order>) orderService.getOrderInBasketByUserId(userId);
                 log.info("Show all Order in Basket");
             } else log.info("Client do not found");;
@@ -110,13 +142,81 @@ public class MainPageController {
     }
 
 
+    @Transactional(propagation = Propagation.REQUIRED)
     @RequestMapping(value = "/addproducttoorder", method = RequestMethod.POST)
-    public String addproducttoorder(@RequestParam(value = "productId", required = true) Integer productId, Model model){
-        //Integer idProduct = product.getIdProduct();
+    public ModelAndView addproducttoorder(@RequestParam(value = "productId", required = true) Integer productId, Authentication principal, Model model){
+        Integer clientId = getIdUserFromPrincipal(principal);
+        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%" + clientId);
+        Integer idProduct = productId;
         System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&" + productId);
 
-        return "main";
+//--------------------------------
+        Product product = null;
+        Client client = null;
+        try {
+            product = (Product) productService.get(idProduct);
+            client = (Client) clientService.get(clientId);
+        } catch (ServiceException e) {
+            e.printStackTrace();
+        }
 
+        if (client.getOrderListInbBasket() == null){
+            client.setOrderListInbBasket(new ArrayList<Order>());
+        }
+
+        List<Order> orderList = client.getOrderListInbBasket();
+        Order order = null;
+        for (Order orderTemp: orderList) {
+            if (orderTemp.getIsRegistryOrder() == 0 && orderTemp.getIsPaidOrder() == 0){
+                order = orderTemp;
+            }
+        }
+
+        if (order == null) {
+            order = new Order();
+        }
+
+        order.setIsPaidOrder(0);
+        order.setIsRegistryOrder(0);
+        order.setTotalPrice(order.getTotalPrice() + product.getPrice());
+        if (order.getProductList() == null){
+            order.setProductList(new ArrayList<Product>());
+        }
+        order.getProductList().add(product);
+
+        if (order.getClient() == null){
+            order.setClient(client);
+        }
+        log.info("Add Product in Order in class MainPageController");
+
+        String messageAboutAddProduct = "ERROR add product into your order";
+        try {
+            if (orderService.saveOrUpdate(order) == true) {
+              messageAboutAddProduct = "Product add into order succesfully";
+            }
+        } catch (ServiceException e) {
+            e.printStackTrace();
+            log.info(messageAboutAddProduct);
+        }
+//--------------------------------
+        return new ModelAndView("main", "messageAboutAddProduct", messageAboutAddProduct);
+    }
+
+    protected Integer getIdUserFromPrincipal(Authentication principal){
+        String username = principal.getName();
+        try {
+            ArrayList clientList = (ArrayList<Client>) clientService.getClientByLogin(username);
+            if (!clientList.isEmpty()){
+                Client client = (Client) clientList.get(0);
+                Integer userId = client.getIdUser();
+                return userId;
+            } else log.info("Client do not found");;
+
+        } catch (ServiceException e) {
+            log.info("ERROR show all Order in Basket");
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

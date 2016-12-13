@@ -6,12 +6,10 @@
 
     <header class="clearfix">
         <div class="headerClass">
-
+            <h3><spring:message code="page.header.welcom"/></h3>
         </div>
 
     </header>
 
 </jsp:root>
-
-
 

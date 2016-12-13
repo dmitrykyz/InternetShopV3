@@ -5,10 +5,10 @@
           xmlns="http://www.w3.org/1999/xhtml" version="2.0" xmlns:form="http://www.springframework.org/tags/form">
 
     <p>Hellow ${user}</p>
+    <p>${messageAboutAddProduct}</p>
 
 
-    <br/>
-    <br/>
+
     <br/>
     <div class="container">
         <div class="table-responsive">

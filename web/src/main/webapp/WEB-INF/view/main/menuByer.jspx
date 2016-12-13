@@ -10,6 +10,9 @@
             <a href="${contextPath}/getAllProduct" class="btn btn-md btn-info btn-block"><spring:message code="page.mainByer.getAllProduct"/></a>
         </li>
         <li>
+            <a href="${contextPath}/getAllProductPagination" class="btn btn-md btn-info btn-block"><spring:message code="page.mainByer.getAllProductPagination"/></a>
+        </li>
+        <li>
             <a href="${contextPath}/showbasket" class="btn btn-md btn-info btn-block"><spring:message code="page.mainByer.showBasket"/></a>
         </li>
         <li>
