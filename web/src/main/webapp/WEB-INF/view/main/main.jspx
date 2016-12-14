@@ -15,16 +15,16 @@
             <table class="table table-hover">
                 <tr>
                     <th>
-                        Product ID  <a href="${contextPath}/filtrProductbyId" class="btn btn-sm btn-default right">^</a>
+                        <spring:message code="page.mainByer.tabel.productId"/>  <a href="${contextPath}/filtrProductbyId" class="btn btn-sm btn-default right">^</a>
                     </th>
                     <th>
-                        NAME  <a href="${contextPath}/filtrProductbyName" class="btn btn-sm btn-default right"> ^ </a>
+                        <spring:message code="page.mainByer.tabel.NAME"/>  <a href="${contextPath}/filtrProductbyName" class="btn btn-sm btn-default right"> ^ </a>
                     </th>
                     <th>
-                        PRICE  <a href="${contextPath}/filtrProductbyPrice" class="btn btn-sm btn-default right"> ^ </a>
+                        <spring:message code="page.mainByer.tabel.PRICE"/>  <a href="${contextPath}/filtrProductbyPrice" class="btn btn-sm btn-default right"> ^ </a>
                     </th>
-                    <th>STATUS</th>
-                    <th>ADD</th>
+                    <th><spring:message code="page.mainByer.tabel.STATUS"/></th>
+                    <th><spring:message code="page.mainByer.tabel.ADD"/></th>
                 </tr>
                 <c:forEach items="${productList}" var="product">
                     <tr>
@@ -53,7 +53,11 @@
         <div class="table-responsive">
             <table class="table table-hover">
                 <tr>
-                    <th>Order ID</th><th>TOTAL PRICE</th><th>REGISTRY</th><th>PAID</th><th></th>
+                    <th><spring:message code="page.mainByer.tabel.OrderID"/></th>
+                    <th><spring:message code="page.mainByer.tabel.TOTALPRICE"/></th>
+                    <th><spring:message code="page.mainByer.tabel.REGISTRY"/></th>
+                    <th><spring:message code="page.mainByer.tabel.PAID"/></th>
+                    <th></th>
                 </tr>
                 <c:forEach items="${listorderinbasket}" var="order">
                     <tr>

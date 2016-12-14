@@ -1,0 +1,92 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:s="http://www.springframework.org/tags/form"
+          xmlns:spring="http://www.springframework.org/tags"
+          xmlns="http://www.w3.org/1999/xhtml" version="2.0" xmlns:form="http://www.springframework.org/tags/form">
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+
+<div class="container">
+    <div class="col-md-9">
+        <div class="container">
+            <br></br>
+            <div class="table-responsive">
+                <table class="table table-hover"  width="50%" border="1" rules="all">
+                    <tr>
+                        <th><spring:message code="page.mainByer.tabel.productId"/></th>
+                        <th><spring:message code="page.mainByer.tabel.NAME"/></th>
+                        <th><spring:message code="page.mainByer.tabel.PRICE"/></th>
+                        <th><spring:message code="page.mainByer.tabel.STATUS"/></th>
+                    </tr>
+
+                    <c:forEach items="${listproductpagination}" var="product">
+                        <tr>
+                            <td align="center"><c:out value="${product.idProduct}" /></td>
+                            <td align="center"><c:out value="${product.nameProduct}" /></td>
+                            <td align="center"><c:out value="${product.price}" /></td>
+                            <td align="center"><c:out value="${product.status}" /></td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </div>
+
+            <br></br>
+            <br></br>
+
+            <h4><spring:message code="page.pagination.totalCountofProduct"/>${totalproductcount}</h4>
+            <br></br>
+            <h4><spring:message code="page.pagination.CurrentPage"/>${page}</h4>
+            <br></br>
+
+            <div>
+                <ul class="pagination">
+                    <c:if test="${page ne 1}">
+                        <li>
+                            <a href="${contextPath}/getAllProductPagination/${page - 1}/${countPerPage}">&#60;&#60;</a>
+                        </li>
+                    </c:if>
+
+                    <c:forEach begin="1" end="${countofpages}" var="i">
+                        <c:choose>
+                            <c:when test="${page eq i}">
+                                <li class="active"><span>${i}</span></li>
+                            </c:when>
+                            <c:otherwise>
+                                <li><a href="${contextPath}/getAllProductPagination/${i}/${countPerPage}">${i}</a>
+                                </li>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+
+                    <c:if test="${page lt countofpages}">
+                        <li>
+                            <a href="${contextPath}/getAllProductPagination/${page + 1}/${countPerPage}">&#62;&#62;</a>
+                        </li>
+                    </c:if>
+                </ul>
+            </div>
+
+            <div class="btn-group pull-right dropdown"> <!--div class="btn-group dropup"-->
+                Change count of rows
+                <br></br>
+                <ul class="pagination">
+                    <li><a href="${contextPath}/getAllProductPagination/1/5">5</a></li>
+                    <li><a href="${contextPath}/getAllProductPagination/1/10">10</a></li>
+                    <li><a href="${contextPath}/getAllProductPagination/1/20">20</a></li>
+                </ul>
+            </div>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+
+        </div>
+    </div>
+</div>
+
+
+</jsp:root>

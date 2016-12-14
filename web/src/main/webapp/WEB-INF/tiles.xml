@@ -40,6 +40,13 @@
         <put-attribute name="body" value="/WEB-INF/view/login/registrationform.jspx"/>
     </definition>
 
+    <definition name="showProductPagination" extends="default">
+        <put-attribute name="title" value="Pagination page"/>
+        <put-attribute name="header" value="/WEB-INF/view/main/headerPagination.jspx"/>
+        <put-attribute name="body" value="/WEB-INF/view/main/showAllProductPagination.jspx"/>
+        <put-attribute name="menu" value="/WEB-INF/view/main/menuPagination.jspx"/>
+    </definition>
+
     <definition name="error" extends="default">
         <put-attribute name="title" value="Error page"/>
         <put-attribute name="body" value="/WEB-INF/view/error.jspx"/>

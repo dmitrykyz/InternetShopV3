@@ -46,19 +46,8 @@ public class RegistrationController {
         } catch (ServiceException e) {
             log.info("ERROR registed Client " + client);
         }
-        //model.addAttribute("user", client);
-        return "main";
 
+        return "login";
     }
-//    @Transactional(propagation = Propagation.REQUIRED)
-//    @RequestMapping(value = {"/passRegistration"} , method = { RequestMethod.POST} )
-//    public ModelAndView passRegistration(@ModelAttribute("user") UserEntity user) {
-//
-//        try {
-//            userService.saveOrUpdate(user);
-//        } catch (ServiceException e) {
-//            e.printStackTrace();
-//        }
-//        return new ModelAndView("login", "currentUser", user);
-//    }
+
 }

@@ -7,6 +7,7 @@ import by.pvt.services.IClientService;
 import by.pvt.services.IOrderService;
 import by.pvt.services.IProductService;
 import by.pvt.services.exception.ServiceException;
+import by.pvt.vo.ProductVOforPagination;
 import com.sun.naming.internal.ResourceManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -56,34 +54,14 @@ public class MainPageController {
         return new ModelAndView("main", "productList", productList);
     }
 
-    @RequestMapping(value = {"/getAllProductPagination"})
+    @RequestMapping(value = {"/getAllProductPagination"}, method = RequestMethod.GET)
     public ModelAndView getAllProductPagination() {
-//        UserPaginationVO userPaginationVO = null;
-//
-//        if (countPerPage == null)
-//            countPerPage = "4";
-//        if (page == null)
-//            page = "1";
-//
-//        try {
-//            userPaginationVO = userService.paginationUsers(page, Integer.valueOf(countPerPage));
-//        } catch (ServiceException e) {
-//            e.printStackTrace();
-//        }
-//
-        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.addObject("totaluserscount", userPaginationVO.getTotalUsersCount());
-//        modelAndView.addObject("countofpages", (int) Math.ceil(userPaginationVO.getTotalUsersCount() * 1.0 / Integer.valueOf(countPerPage)));
-//        modelAndView.addObject("page", userPaginationVO.getPage());
-//        modelAndView.addObject("alluserslist", userPaginationVO.getUserEntityList());
-//        modelAndView.addObject("countPerPage",countPerPage);
-//
-//        //session.setAttribute("page", userPaginationVO.getPage());
-//
-//        //session.setAttribute("countPerPage", countPerPage);
+        return paginationUtil("1", "10");
+    }
 
-        modelAndView.setViewName("showProductPagination");
-        return modelAndView;
+    @RequestMapping(value = {"/getAllProductPagination/{page}/{countPerPage}"}, method = RequestMethod.GET)
+    public ModelAndView getAllUsersPagination(@PathVariable String page, @PathVariable String countPerPage) {
+        return paginationUtil(page, countPerPage);
     }
 
     @RequestMapping(value = {"/filtrProductbyId"})
@@ -149,8 +127,6 @@ public class MainPageController {
         System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%" + clientId);
         Integer idProduct = productId;
         System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&" + productId);
-
-//--------------------------------
         Product product = null;
         Client client = null;
         try {
@@ -198,7 +174,6 @@ public class MainPageController {
             e.printStackTrace();
             log.info(messageAboutAddProduct);
         }
-//--------------------------------
         return new ModelAndView("main", "messageAboutAddProduct", messageAboutAddProduct);
     }
 
@@ -217,6 +192,30 @@ public class MainPageController {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private ModelAndView paginationUtil(String page, String countPerPage) {
+        ProductVOforPagination productVOforPagination = null;
+        if (countPerPage == null)
+            countPerPage = "10";
+        if (page == null)
+            page = "1";
+
+        try {
+            productVOforPagination = productService.paginationProducts(page, Integer.valueOf(countPerPage));
+        } catch (ServiceException e) {
+            e.printStackTrace();
+        }
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("totalproductcount", productVOforPagination.getTotalProductCount());
+        modelAndView.addObject("countofpages", (int) Math.ceil(productVOforPagination.getTotalProductCount()) * 1.0 / Integer.valueOf(countPerPage));
+        modelAndView.addObject("page", productVOforPagination.getPage());
+        modelAndView.addObject("listproductpagination", productVOforPagination.getProductList());
+        modelAndView.addObject("countPerPage",countPerPage);
+
+        modelAndView.setViewName("showProductPagination");
+        return modelAndView;
     }
 
 }
