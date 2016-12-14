@@ -54,6 +54,13 @@ public class MainPageController {
         return new ModelAndView("main", "productList", productList);
     }
 
+    
+    @RequestMapping(value = "/backToMainByer", method = RequestMethod.GET)
+    public String backToMainByer() {
+        return "main";
+    }
+    
+    
     @RequestMapping(value = {"/getAllProductPagination"}, method = RequestMethod.GET)
     public ModelAndView getAllProductPagination() {
         return paginationUtil("1", "10");

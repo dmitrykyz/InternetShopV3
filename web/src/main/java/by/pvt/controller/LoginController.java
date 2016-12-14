@@ -39,12 +39,6 @@ public class LoginController {
         model.addAttribute("greeting", "Hello and welcome");
         return "login";
     }
-//    @RequestMapping(value = "/admin", method = RequestMethod.GET)
-//    public String adminPage(ModelMap model, Authentication principal) {
-//        System.out.println(principal.getPrincipal());
-//        model.addAttribute("user", getPrincipal());
-//        return "admin";
-//    }
 
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)

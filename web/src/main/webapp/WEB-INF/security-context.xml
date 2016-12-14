@@ -10,6 +10,7 @@
         <intercept-url pattern="/" access="permitAll"/>
         <intercept-url pattern="/main" access="hasAnyRole('ADMIN', 'CLIENT')"/>
         <intercept-url pattern="/admin" access="hasRole('ADMIN')"/>  <!--ADMIN == 1 -->
+        <intercept-url pattern="/addNewProduct" access="hasRole('ADMIN')"/>  <!--ADMIN == 1 -->
         <form-login login-page="/login"
                     default-target-url="/main"
                     username-parameter="login"

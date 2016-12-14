@@ -27,7 +27,7 @@
     <definition name="admin" extends="default">
         <put-attribute name="title" value="Main admin page"/>
         <put-attribute name="menu" value="/WEB-INF/view/main/menuAdmin.jspx"/>
-        <put-attribute name="body" value="/WEB-INF/view/main/main.jspx"/>
+        <put-attribute name="body" value="/WEB-INF/view/main/admin.jspx"/>
     </definition>
 
     <definition name="access_denied" extends="default">
@@ -38,6 +38,11 @@
     <definition name="registrationform" extends="default">
         <put-attribute name="title" value="Registration page"/>
         <put-attribute name="body" value="/WEB-INF/view/login/registrationform.jspx"/>
+    </definition>
+
+    <definition name="addNewProduct" extends="default">
+        <put-attribute name="title" value="Add New Product page"/>
+        <put-attribute name="body" value="/WEB-INF/view/main/addNewProduct.jspx"/>
     </definition>
 
     <definition name="showProductPagination" extends="default">

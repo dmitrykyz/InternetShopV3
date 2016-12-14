@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns:jsp="http://java.sun.com/JSP/Page"
+      xmlns:spring="http://www.springframework.org/tags"
+      xmlns:form="http://www.springframework.org/tags/form" xmlns:s="http://www.springframework.org/tags/form">
+
+<jsp:directive.page pageEncoding="UTF-8" contentType="text/html; UTF-8"/>
+<head>
+
+</head>
+
+<body>
+
+
+<br/>
+<div class="container">
+    <div class="span12">
+        <form:form method="post" commandName="product" action="addNewProductApprove" class="box add New Product"> <!--action="getUserById""-->
+            <fieldset class="boxBody">
+                <h3>Please enter param new product.</h3>
+                <br/>
+                <input type="hidden" name="command" value="addnewproduct" />
+                Product name: <br/><input type="text" name="nameProduct"/>
+                <br/>
+                Price: <br/><input type="number" name="price" value=""/>
+                <br/>
+                Status <br/><input type="text" name="status" value=""/>
+                <br/>
+                <br/>
+                <input class="btn btn-default" type="submit" value="Add product"/>
+            </fieldset>
+        </form:form>
+        <hr/>
+    </div>
+</div>
+
+
+</body>
+</html>

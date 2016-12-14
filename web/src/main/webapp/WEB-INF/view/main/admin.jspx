@@ -5,8 +5,10 @@
           xmlns="http://www.w3.org/1999/xhtml" version="2.0" xmlns:form="http://www.springframework.org/tags/form">
 
     <p>Hellow ${user}</p>
+    <p>${messageAboutAddProductSuccesfully}</p>
 
 
+    <br/>
     <br/>
     <br/>
     <br/>
@@ -15,16 +17,16 @@
             <table class="table table-hover">
                 <tr>
                     <th>
-                        Product ID  <a href="${contextPath}/filtrProductbyId" class="btn btn-sm btn-default right">^</a>
+                        <spring:message code="page.mainByer.tabel.productId"/>  <a href="${contextPath}/filtrProductbyId" class="btn btn-sm btn-default right">^</a>
                     </th>
                     <th>
-                        NAME  <a href="${contextPath}/filtrProductbyName" class="btn btn-sm btn-default right"> ^ </a>
+                        <spring:message code="page.mainByer.tabel.NAME"/>  <a href="${contextPath}/filtrProductbyName" class="btn btn-sm btn-default right"> ^ </a>
                     </th>
                     <th>
-                        PRICE  <a href="${contextPath}/filtrProductbyPrice" class="btn btn-sm btn-default right"> ^ </a>
+                        <spring:message code="page.mainByer.tabel.PRICE"/>  <a href="${contextPath}/filtrProductbyPrice" class="btn btn-sm btn-default right"> ^ </a>
                     </th>
-                    <th>STATUS</th>
-                    <th>ADD</th>
+                    <th><spring:message code="page.mainByer.tabel.STATUS"/></th>
+                    <th><spring:message code="page.mainByer.tabel.ADD"/></th>
                 </tr>
                 <c:forEach items="${productList}" var="product">
                     <tr>
@@ -36,9 +38,9 @@
                         <td align="center"><c:out value="${product.price}" /></td>
                         <td align="center"><c:out value="${product.status}" /></td>
                         <td align="center">
-                            <form action="addproducttoorder" method="post" class="form-signin" role="form">
+                            <form id="personForm" action="addproducttoorder" method="post" class="form-signin" role="form">
                                 <input type="hidden" name="productId" value="${product.idProduct}" />
-                                <input class = "btn btn-default" type="submit" value="+" onclick="" />
+                                <input class = "btn btn-default" id="personButton" type="submit" value="+" />
                             </form>
                         </td>
                     </tr>
@@ -49,38 +51,6 @@
         <br/>
         <br/>
         <br/>
-
-        <div class="table-responsive">
-            <table class="table table-hover">
-                <tr>
-                    <th>Order ID</th><th>TOTAL PRICE</th><th>REGISTRY</th><th>PAID</th><th></th>
-                </tr>
-                <c:forEach items="${listorderinbasket}" var="order">
-                    <tr>
-                        <td align="center">
-                            <c:out value="${order.idOrder}" />
-                        </td>
-                        <td align="center"><c:out value="${order.totalPrice}" /></td>
-                        <td align="center"><c:out value="${order.isRegistryOrder}" /></td>
-                        <td align="center"><c:out value="${order.isPaidOrder}" /></td>
-                        <td></td>
-                    <tr>
-                        <th>#</th><th>Product ID</th><th>NAME</th><th>PRICE</th><th>STATUS</th>
-                    </tr>
-                    <c:forEach items="${order.productList}" var="productinorder">
-                        <tr>
-                            <td></td>
-                            <td align="center"><c:out value="${productinorder.idProduct}" /></td>
-                            <td align="center"><c:out value="${productinorder.nameProduct}" /></td>
-                            <td align="center"><c:out value="${productinorder.price}" /></td>
-                            <td align="center"><c:out value="${productinorder.status}" /></td>
-                        </tr>
-                    </c:forEach>
-                    </tr>
-                </c:forEach>
-            </table>
-
-        </div>
 
 
     </div>

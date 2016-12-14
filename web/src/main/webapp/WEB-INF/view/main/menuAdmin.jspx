@@ -7,13 +7,10 @@
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li>
-                <a href="${contextPath}/#" class="btn btn-md btn-info btn-block"><spring:message code="page.mainAdmin.addNewProduct"/></a>
+                <a href="${contextPath}/addNewProduct" class="btn btn-md btn-info btn-block"><spring:message code="page.mainAdmin.addNewProduct"/></a>
             </li>
             <li>
-                <a href="${contextPath}/getAllProduct" class="btn btn-md btn-info btn-block"><spring:message code="page.mainByer.getAllProduct"/></a>
-            </li>
-            <li>
-                <a href="${contextPath}/showbasket" class="btn btn-md btn-info btn-block"><spring:message code="page.mainByer.showBasket"/></a>
+                <a href="${contextPath}/getAllProductAdmin" class="btn btn-md btn-info btn-block"><spring:message code="page.mainByer.getAllProduct"/></a>
             </li>
             <li>
                 <a href="${contextPath}/logout" class="btn btn-md btn-info btn-block"><spring:message code="page.logout"/></a>
